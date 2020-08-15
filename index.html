@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular User Managment application</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" type="text/css">
+	<script type="text/javascript">
+		let app = angular.module('app', []);
+		app.controller('UserController', UserController);
+
+		function UserController() {
+			var vm = this;
+			vm.title = "Jayalakshmi" // mock title
+			//create some mock users.  it is going to be an array and inside array we have some objects.
+			vm.users = [
+				{
+					name: "silpa",
+					age: "30"
+				},
+				{
+					name: 'Murali',
+					age: '32'
+				},
+				{
+					name: 'Jaya',
+					age: '3 months'
+				}
+			]
+			vm.addUser = function(){
+				vm.users.push(vm.user);
+				vm.user = '';
+			}
+			vm.deleteUser = function(index) {
+				vm.users.splice(index, 1);
+			}
+			vm.editUser = function(user){
+				vm.user = user;
+			}
+			vm.updateUser = function() {
+				vm.user = '';
+			}
+		}
+	</script>
+</head>
+<body ng-controller = "UserController as vm">
+<div class="container">
+	<h1> Angular User Managment Application</h1>
+<!-- 	<input placeholder="enter name" class="name-input" ng-model="vm.user.name"></input>
+	<input placeholder="enter age" class="age-input" ng-model="vm.user.age"></input>
+	<button ng-click="vm.addUser()" class="btn btn-primary"> Add </button>
+	<button ng-click="vm.deleteUser()"class="btn btn-primary"> Delete </button>
+	<button ng-click="vm.editUser()"class="btn btn-primary"> Edit </button> -->
+	<table class="table" >
+		<thead>
+			<tr>
+				<th>Name:</th>
+				<th>Age:</th>
+			</tr>
+		<tr>
+			<td>
+				<input placeholder="enter name" class="name-input" ng-model="vm.user.name"></input>
+			</td>
+			<td>
+				<input placeholder="enter age" class="age-input" ng-model="vm.user.age"></input>
+			</td>
+			<td>
+				<button ng-click="vm.addUser()" class="btn btn-primary">Add</button>
+			</td>
+			<td>
+				<button ng-click="vm.updateUser()" class="btn btn-primary">Update</button>
+			</td>
+		</tr>
+		</thead>
+		<tbody ng-repeat="user in vm.users">
+			<tr>
+				<td>
+					{{user.name}}
+				</td>
+				<td>
+					{{user.age}}
+				</td>
+				<td>
+					<button ng-click="vm.deleteUser($index)"class="btn btn-primary">Delete</button>
+				</td>
+				<td>
+					<button ng-click="vm.editUser(user)"class="btn btn-primary">Edit</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>
